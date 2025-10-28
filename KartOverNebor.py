@@ -83,9 +83,14 @@ def on_click(event):
     axMap.scatter(x, y, c="black", s=size_from_nedbor(aarsnedbor) * 1.5, marker="o")
     axMap.scatter(x, y, c=color_from_nedbor(aarsnedbor), s=size_from_nedbor(aarsnedbor), marker="o")
     axGraph.bar(months, y_pred, color=colorsPred)
+
+    # 🟣 Legg til lilla strek for gjennomsnittlig månedlig nedbør
+    gjennomsnitt = np.mean(y_pred)
+    axGraph.axhline(y=gjennomsnitt, color='red', linestyle='--', linewidth=2, label=f"Gjennomsnitt: {gjennomsnitt:.1f} mm")
+    axGraph.legend(loc='upper left', fontsize=8)
+
     draw_label_and_ticks()
     plt.draw()
-
 
 df = pd.read_csv('NedborX.csv')
 img = mpimg.imread('Bergen.png')
